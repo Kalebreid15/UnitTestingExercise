@@ -7,59 +7,67 @@ namespace UnitTestingExercise.Tests
     {
         [Theory]
         [InlineData(2, 3, 5, 10)] //Add test data <-------
+        [InlineData(0, 2, 4, 6)]
+        [InlineData(-1, -2, -5, -8)]
+        [InlineData(-2, 3, -5, -4)]
         public void AddTest(int num1, int num2, int num3, int expected)
         {
-            //Start Step 3 here:
+            var c = new Calculator();
 
-            //Arrange
-            // create a Calculator object
-            
+            var actual = c.Add(num1, num2, num3);
 
-            //Act
-                // call the Add method that is located in the Calculator class
-                // and store its result in a variable named actual
-
-            //Assert
-                //Assert.Equal(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
-        [InlineData()]//Add test data <-------
-        public void SubtractTest(int minuend, int subtrhend, int expected)
+        [InlineData(2, 3, -1)]
+        [InlineData(0, 2, -2)]
+        [InlineData(-1, -2, 1)]
+        [InlineData(-2, 3, -5)]
+        public void SubtractTest(int minuend, int subtrahend, int expected)
         {
-            //Start Step 5 here:
+            var c = new Calculator();
 
-            //Arrange
+            var actual = c.Subtract(minuend, subtrahend);
 
-            //Act
-
-            //Assert
+            Assert.Equal(expected, actual);
 
         }
 
         [Theory]
-        [InlineData()]//Add test data <-------
+        [InlineData(2, 3, 6)]
+        [InlineData(0, 2, 0)]
+        [InlineData(-1, -2, 2)]
+        [InlineData(-2, 3, -6)]
         public void MultiplyTest(int num1, int num2, int expected)
         {
-            //Start Step 7 here:
+            var c = new Calculator();
 
-            //Arrange
+            var actual = c.Multiply(num1, num2);
 
-            //Act
-
-            //Assert
+            Assert.Equal(expected, actual);
 
         }
 
         [Theory]
-        [InlineData()]//Add test data <-------
+        [InlineData(10, 2, 5)]
+        [InlineData(2, 1, 2)]
+        [InlineData(16, -4, -4)]
+        [InlineData(27, 3, 9)]
         public void DivideTest(int num1, int num2, int expected)
         {
-            //Arrange
+            var c = new Calculator();
+            if (num2 == 0)
 
-            //Act
+            {
+                Assert.Throws<DivideByZeroException>(() => c.Divide(num1, num2));
+                return; // Skip the assertion below if we expect an exception
+            }
 
-            //Assert
+            var actual = c.Divide(num1, num2);
+
+            Assert.Equal(expected, actual);
+
 
         }
 
